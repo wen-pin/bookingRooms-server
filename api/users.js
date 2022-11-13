@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
-const User = require("../api/user");
+const User = require("../models/user");
 
 // 取得所有會員
 router.get("/", async (req, res) => {
