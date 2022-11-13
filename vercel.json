@@ -1,0 +1,9 @@
+{
+  "rewrites": [{ "source": "/users/:id", "destination": "/api/users" }],
+  "functions": {
+    "api/*.js": {
+      "memory": 3008,
+      "maxDuration": 60
+    }
+  }
+}
