@@ -1,5 +1,5 @@
 {
-  "rewrites": [{ "source": "/users/:id", "destination": "/api/users" }],
+  "cleanUrls": true,
   "functions": {
     "api/*.js": {
       "memory": 1024,

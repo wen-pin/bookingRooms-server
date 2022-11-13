@@ -17,8 +17,8 @@ const db = mongoose.connection;
 db.on("error", (error) => console.error(error));
 db.once("open", () => console.log("Connected to Database"));
 
-const usersRouter = require("./api/users");
-app.use("/api/users", usersRouter);
+const users = require("./api/users");
+app.use("/api/users", users);
 
 app.get("/", (req, res) => {
   res.render("index.ejs");
