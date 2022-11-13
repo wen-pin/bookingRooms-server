@@ -6,6 +6,7 @@ const app = express();
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const PORT = process.env.PORT || 3000;
 
 // 服務器師道請求,傳遞路由之前執行的代碼,讓服務器接受json作為主體
 app.use(express.json());
@@ -97,4 +98,4 @@ app.post("/users/login", async (req, res) => {
 //   });
 // }
 
-app.listen(3000);
+app.listen(PORT, () => console.log(`Server is running in port ${PORT}`));
