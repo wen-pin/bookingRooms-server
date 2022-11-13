@@ -32,9 +32,10 @@ app.post("/token", (req, res) => {
   });
 });
 
+// 註冊
 app.post("/users", async (req, res) => {
   try {
-    // 註冊加密
+    // 密碼加密
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
@@ -46,13 +47,15 @@ app.post("/users", async (req, res) => {
   }
 });
 
-// 刪除刷新令牌，防止用戶無限取得訪問令牌，也就是登出
+// 登出
+// 刪除刷新令牌，防止用戶無限取得訪問令牌
 // 目前刪除刷新令牌的變數中的令牌，之後改為刪除資料庫中的令牌
 app.delete("/logout", (req, res) => {
   refreshTokens = refreshTokens.filter((token) => token !== req.body.token);
   res.sendStatus(204);
 });
 
+// 登入
 app.post("/users/login", async (req, res) => {
   //Authenticate User
   const user = users.find((user) => user.username === req.body.username);
