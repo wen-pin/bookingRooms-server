@@ -1,16 +1,16 @@
 ### 取得所有會員
-GET http://localhost:3000/users
+GET http://localhost:3000/api/users
 
 ### 取得單一會員
-GET http://localhost:3000/users/637098e6d135117bddb5b925
+GET http://localhost:3000/api/users/637230c2b1a1f14c9799659a
 
 ### 註冊會員
-POST http://localhost:3000/users
+POST http://localhost:3000/api/users
 Content-Type: application/json
 
 {
-  "username": "Pin1",
-  "password": "qaws1"
+  "username": "Pin3",
+  "password": "qaws3"
 }
 
 ### 更新會員資訊
@@ -22,7 +22,7 @@ Content-Type: application/json
 }
 
 ### 刪除會員
-DELETE http://localhost:3000/users/637098e6d135117bddb5b925
+DELETE http://localhost:3000/api/users/637098e6d135117bddb5b925
 
 ### 刪除刷新令牌
 DELETE http://localhost:4000/logout
