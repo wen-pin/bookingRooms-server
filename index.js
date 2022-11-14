@@ -21,7 +21,7 @@ const users = require("./api/users");
 app.use("/api/users", users);
 
 app.get("/", (req, res) => {
-  res.render("index.ejs");
+  res.send("Hi");
 });
 
 // const users = [
