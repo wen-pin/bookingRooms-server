@@ -1,10 +1,10 @@
 {
-  "builds": [
-    {
-      "src": "./server.js",
-      "use": "@vercel/node"
+  "function": {
+    "server.js": {
+      "memory": 1024,
+      "maxDuration": 10
     }
-  ],
+  },
   "routes": [
     {
       "src": "/(.*)",
