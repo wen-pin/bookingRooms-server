@@ -11,8 +11,8 @@
       "destination": "/server.js"
     },
     {
-      "source": "/api/users", 
-      "destination": "/api/users.js"
+      "source": "/(users.*)", 
+      "destination": "/api/users"
     }
   ]
 }
