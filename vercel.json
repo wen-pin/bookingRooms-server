@@ -1,20 +1,14 @@
 {
-  "functions": {
-    "api/*.js": {
-      "memory": 1024,
-      "maxDuration": 10,
-      "runtime": "@vercel/node"
-    },
-    "server.js": {
-      "memory": 1024,
-      "maxDuration": 10,
-      "runtime": "@vercel/node"
-    }
-  },
-  "routes": [
+  "builds": [
     {
-      "src": "/(.*)",
-      "dest": "/server.js"
+      "src": "./server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/", 
+      "destination": "/server.js"
     }
   ]
 }
