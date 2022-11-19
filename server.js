@@ -90,7 +90,7 @@ app.post("/users/login", async (req, res) => {
 
       // 創建訪問令牌
       const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
-      res.statue(201).json({ accessToken: accessToken });
+      res.status(201).json({ accessToken: accessToken });
     } else {
       res.send("Not Allowed");
     }
