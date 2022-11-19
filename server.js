@@ -6,7 +6,8 @@ const app = express();
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
+const User = require("./models/user");
 
 // 服務器師道請求,傳遞路由之前執行的代碼,讓服務器接受json作為主體
 app.use(express.json());
@@ -20,9 +21,23 @@ db.once("open", () => console.log("Connected to Database"));
 const users = require("./api/users");
 app.use("/api/users", users);
 
+app.set("view-engine", "ejs");
+// 希望在from輸入的資料，可以在post方法的request中訪問
+app.use(express.urlencoded({ extended: false }));
+
 app.get("/", (req, res) => {
-  res.send("Hi");
+  res.render("index.ejs", { name: "Kyle" });
 });
+
+app.get("/login", (req, res) => {
+  res.render("login.ejs");
+});
+
+app.get("/register", (req, res) => {
+  res.render("register.ejs");
+});
+
+app.post("/register", (req, res) => {});
 
 // const users = [
 //   {
@@ -61,6 +76,7 @@ app.get("/", (req, res) => {
 // 登入
 app.post("/users/login", async (req, res) => {
   //Authenticate User
+  let users = await User.find();
   const user = users.find((user) => user.username === req.body.username);
   if (user == null) {
     return res.status(400).send("Cannot find user");
@@ -74,7 +90,7 @@ app.post("/users/login", async (req, res) => {
 
       // 創建訪問令牌
       const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
-      res.json({ accessToken: accessToken });
+      res.statue(201).json({ accessToken: accessToken });
     } else {
       res.send("Not Allowed");
     }
