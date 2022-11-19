@@ -41,10 +41,10 @@ Content-Type: application/json
 }
 
 ### 登入帳密
-POST http://localhost:8000/users/login
+POST http://localhost:8000/api/users/login
 Content-Type: application/json
 
 {
-  "username": "Pin4",
-  "password": "qaws4" 
+  "username": "Pin3",
+  "password": "qaws3" 
 }
