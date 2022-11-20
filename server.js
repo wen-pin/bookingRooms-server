@@ -23,21 +23,21 @@ app.use("/api/users", users);
 
 app.set("view-engine", "ejs");
 // 希望在from輸入的資料，可以在post方法的request中訪問
-app.use(express.urlencoded({ extended: false }));
+// app.use(express.urlencoded({ extended: false }));
 
-app.get("/", (req, res) => {
-  res.render("index.ejs", { name: "Kyle" });
-});
+// app.get("/", (req, res) => {
+//   res.render("index.ejs", { name: "Kyle" });
+// });
 
-app.get("/login", (req, res) => {
-  res.render("login.ejs");
-});
+// app.get("/login", (req, res) => {
+//   res.render("login.ejs");
+// });
 
-app.get("/register", (req, res) => {
-  res.render("register.ejs");
-});
+// app.get("/register", (req, res) => {
+//   res.render("register.ejs");
+// });
 
-app.post("/register", (req, res) => {});
+// app.post("/register", (req, res) => {});
 
 // const users = [
 //   {
