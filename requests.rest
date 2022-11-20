@@ -9,8 +9,8 @@ POST http://localhost:8000/api/users
 Content-Type: application/json
 
 {
-  "username": "Pin4",
-  "password": "qaws4"
+  "username": "Pin5",
+  "password": "qaws5"
 }
 
 ### 更新會員資訊
