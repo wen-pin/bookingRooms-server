@@ -7,7 +7,7 @@ const User = require("../models/user");
 router.get("/", async (req, res) => {
   try {
     const users = await User.find();
-    res.send(users);
+    res.status(200).send(users);
   } catch (err) {
     // 數據庫的服務器存在某種錯誤，與API和客戶端無關
     res.status(500).json({ message: err.message });
