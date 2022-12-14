@@ -1,117 +1,33 @@
 // 從我們的的環境加載我們所有的環境變數
 require("dotenv").config();
-
 const express = require("express");
 const app = express();
+const cookieParser = require("cookie-parser");
+const connectDB = require("./config/dbConn");
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 const PORT = process.env.PORT || 8000;
-const User = require("./models/user");
+
+connectDB();
 
 // 服務器師道請求,傳遞路由之前執行的代碼,讓服務器接受json作為主體
 app.use(express.json());
+app.use(cookieParser());
 
-// 連接資料庫
-mongoose.connect(process.env.DATABASE_URL);
-const db = mongoose.connection;
-db.on("error", (error) => console.error(error));
-db.once("open", () => console.log("Connected to Database"));
+app.use("/api/users", require("./api/users"));
+app.use("/api/auth", require("./api/auth"));
 
-const users = require("./api/users");
-app.use("/api/users", users);
+// app.set("view-engine", "ejs");
 
-app.set("view-engine", "ejs");
-// 希望在from輸入的資料，可以在post方法的request中訪問
-// app.use(express.urlencoded({ extended: false }));
-
-// app.get("/", (req, res) => {
-//   res.render("index.ejs", { name: "Kyle" });
-// });
-
-// app.get("/login", (req, res) => {
-//   res.render("login.ejs");
-// });
-
-// app.get("/register", (req, res) => {
-//   res.render("register.ejs");
-// });
-
-// app.post("/register", (req, res) => {});
-
-// const users = [
-//   {
-//     username: "Kyle",
-//     title: "Post 1",
-//   },
-//   {
-//     username: "Jim",
-//     title: "Post 2",
-//   },
-//   {
-//     username: "Pin18",
-//     title: "Post 2",
-//   },
-// ];
-
-// 理解為後台登入者帳號需要驗證才能看到所有會員
-// app.get("/users", authenticateToken, (req, res) => {
-//   res.json(users.filter((user) => user.username === req.user.username));
-// });
-
-// app.post("/users", async (req, res) => {
-//   try {
-//     // 註冊加密
-//     const salt = await bcrypt.genSalt();
-//     const hashedPassword = await bcrypt.hash(req.body.password, salt);
-
-//     const user = { username: req.body.username, password: hashedPassword };
-//     users.push(user);
-//     res.status(201).send(users);
-//   } catch (err) {
-//     res.status(500).send();
-//   }
-// });
-
-// 登入
-app.post("/api/users/login", async (req, res) => {
-  //Authenticate User
-  let users = await User.find();
-  const user = users.find((user) => user.username === req.body.username);
-  if (user == null) {
-    return res.status(400).send("Cannot find user");
-  }
-  try {
-    // 驗證密碼
-    if (await bcrypt.compare(req.body.password, user.password)) {
-      // res.send("Sucess");
-      const username = req.body.username;
-      const user = { username: username };
-
-      // 創建訪問令牌
-      const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
-      res.status(201).json({ accessToken: accessToken });
-    } else {
-      res.send("Not Allowed");
-    }
-  } catch {
-    res.status(500).send();
-  }
+mongoose.connection.once("open", () => {
+  console.log("Connected to MongoDB");
+  app.listen(PORT, () => console.log(`Server is running in port ${PORT}`));
+  // app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 });
 
-// 中間件身份驗證令牌
-// function authenticateToken(req, res, next) {
-//   const authHeader = req.headers["authorization"];
-//   // authHeader = Bearer + TOKEN
-//   const token = authHeader && authHeader.split(" ")[1];
-//   if (token == null) return res.sendStatus(401);
-
-//   // jwt驗證
-//   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-//     if (err) return res.sendStatus(403);
-//     req.user = user;
-//     next();
-//   });
-// }
-
-app.listen(PORT, () => console.log(`Server is running in port ${PORT}`));
+mongoose.connection.on("error", (err) => {
+  console.log(err);
+  // logEvents(
+  //   `${err.no}: ${err.code}\t${err.syscall}\t${err.hostname}`,
+  //   "mongoErrLog.log"
+  // );
+});
