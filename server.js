@@ -15,6 +15,7 @@ app.use(cookieParser());
 
 app.use("/api/users", require("./api/users"));
 app.use("/api/auth", require("./api/auth"));
+app.use("/api/rooms", require("./api/rooms"));
 
 // 連接資料庫
 mongoose.connect(process.env.DATABASE_URL);
