@@ -101,8 +101,14 @@ const logout = (req, res) => {
   res.json({ message: "Cookie cleared" });
 };
 
+const user = asyncHandler(async (req, res) => {
+  username = req.user;
+  res.json({ username });
+});
+
 module.exports = {
   login,
   refresh,
   logout,
+  user,
 };

@@ -2,10 +2,12 @@ require("dotenv").config();
 const express = require("express");
 const router = express.Router();
 const authController = require("../controllers/authController");
+const verifyJWT = require("../middleware/verifyJWT");
 
 router.post("/login", authController.login);
 router.get("/refresh", authController.refresh);
 router.post("/logout", authController.logout);
+router.get("/user", verifyJWT, authController.user);
 
 // 暫時存放在本地儲存變數,之後改為存放在資料庫
 // let refreshTokens = [];
