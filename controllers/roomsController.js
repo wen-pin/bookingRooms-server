@@ -14,15 +14,45 @@ const getAllRooms = asyncHandler(async (req, res) => {
 const getRoom = asyncHandler(async (req, res) => {});
 
 const createNewRoom = asyncHandler(async (req, res) => {
-  const { roomTitle, address } = req.body;
+  const {
+    landlord,
+    rentalType,
+    title,
+    country,
+    location,
+    isAcceptPet,
+    limitPeople,
+    price,
+    pattern,
+    averageRating,
+    evaluationStandards,
+    allMessages,
+    img,
+    alleqptAndServices,
+  } = req.body;
 
-  const roomObject = { roomTitle, address };
+  const roomObject = {
+    landlord,
+    rentalType,
+    title,
+    country,
+    location,
+    isAcceptPet,
+    limitPeople,
+    price,
+    pattern,
+    averageRating,
+    evaluationStandards,
+    allMessages,
+    img,
+    alleqptAndServices,
+  };
 
   const room = await Room.create(roomObject);
 
   if (room) {
     //created
-    res.status(201).json({ message: `New room ${roomTitle} created` });
+    res.status(201).json({ message: `New room ${title} created` });
   } else {
     res.status(400).json({ message: "Invalid user data received" });
   }
