@@ -65,6 +65,7 @@ const alleqptAndServicesSchema = new mongoose.Schema({
 
 // unique表示唯一的，表示數據裡面的值不能重複
 const roomSchema = new mongoose.Schema({
+  id: Number,
   // 房東姓名
   landlord: {
     type: String,
