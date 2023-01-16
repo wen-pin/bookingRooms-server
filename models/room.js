@@ -1,5 +1,35 @@
 const mongoose = require("mongoose");
 
+const locationSchema = new mongoose.Schema({
+  // 地址
+  address: String,
+  // 緯度
+  lat: Number,
+  // 經度
+  lng: Number,
+});
+
+const priceSchema = new mongoose.Schema({
+  // 平日費用
+  weekday: Number,
+  // 假日費用
+  holiday: Number,
+  // 服務費
+  serviceCharge: Number,
+  // 清潔費
+  cleaningFee: Number,
+  // 稅費
+  taxCharges: Number,
+});
+
+const patternSchema = new mongoose.Schema({
+  bedroom: Number,
+  bed: Number,
+  bathroom: Number,
+  // 共用衛浴
+  sharedBathroom: Number,
+});
+
 // unique表示唯一的，表示數據裡面的值不能重複
 const roomSchema = new mongoose.Schema({
   // 房東姓名
@@ -22,42 +52,16 @@ const roomSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  location: {
-    // 地址
-    address: String,
-    // 緯度
-    lat: Number,
-    // 經度
-    lng: Number,
-  },
+  location: locationSchema,
   // 是否接受寵物入住
   isAcceptPet: Boolean,
   // 入住人數限制
   limitPeople: Number,
-  price: {
-    // 平日費用
-    weekday: Number,
-    // 假日費用
-    holiday: Number,
-    // 服務費
-    serviceCharge: Number,
-    // 清潔費
-    cleaningFee: Number,
-    // 稅費
-    taxCharges: Number,
-  },
+  price: priceSchema,
   // 房間格局
-  pattern: {
-    bedroom: Number,
-    bed: Number,
-    bathroom: Number,
-    // 共用衛浴
-    sharedBathroom: Number,
-  },
+  pattern: patternSchema,
   // 平均評價
-  averageRating: {
-    type: Number,
-  },
+  averageRating: Number,
   // 評價標準
   evaluationStandards: [
     { title: String, value: Number },
@@ -67,6 +71,8 @@ const roomSchema = new mongoose.Schema({
     { title: String, value: Number },
     { title: String, value: Number },
   ],
+  // 房間留言
+  allMessages: [],
   img: {
     roomQuality: Number,
   },
