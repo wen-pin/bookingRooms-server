@@ -13,7 +13,7 @@ const getAllRooms = asyncHandler(async (req, res) => {
 });
 
 const getRoom = asyncHandler(async (req, res) => {
-  const { id } = req.params;
+  const id = parseInt(req.params.id);
   // Confirm data
   if (!id) {
     return res.status(400).json({ message: "This field is required" });
