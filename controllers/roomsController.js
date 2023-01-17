@@ -25,7 +25,7 @@ const getRoom = asyncHandler(async (req, res) => {
     return res.status(400).json({ message: "Room is not found" });
   }
 
-  res.send(room.title);
+  res.json(room);
 });
 
 const createNewRoom = asyncHandler(async (req, res) => {
@@ -138,7 +138,7 @@ const updateRoom = asyncHandler(async (req, res) => {
 
   const updateRoom = await room.save();
 
-  res.json({ message: `${updateRoom.id} updated` });
+  res.json(updateRoom);
 });
 
 const deleteRoom = asyncHandler(async (req, res) => {});
