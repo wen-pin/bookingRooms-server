@@ -12,7 +12,21 @@ const getAllRooms = asyncHandler(async (req, res) => {
   res.json(rooms);
 });
 
-const getRoom = asyncHandler(async (req, res) => {});
+const getRoom = asyncHandler(async (req, res) => {
+  const { id } = req.body;
+  // Confirm data
+  if (!id) {
+    return res.status(400).json({ message: "This field is required" });
+  }
+
+  const room = await Room.findOne({ id: id });
+
+  if (!room) {
+    return res.status(400).json({ message: "Room is not found" });
+  }
+
+  res.send(room.title);
+});
 
 const createNewRoom = asyncHandler(async (req, res) => {
   // 第一個參數是搜尋這個id找到這筆數據
@@ -82,7 +96,50 @@ const createNewRoom = asyncHandler(async (req, res) => {
   );
 });
 
-const updateRoom = asyncHandler(async (req, res) => {});
+const updateRoom = asyncHandler(async (req, res) => {
+  const {
+    id,
+    landlord,
+    rentalType,
+    title,
+    country,
+    location,
+    isAcceptPet,
+    limitPeople,
+    price,
+    pattern,
+    averageRating,
+    evaluationStandards,
+    allMessages,
+    img,
+    alleqptAndServices,
+  } = req.body;
+
+  const room = await Room.findOne({ id: id });
+  if (!room) {
+    return res.status(400).json({ message: "Room is not found" });
+  }
+
+  room.id = id;
+  room.landlord = landlord;
+  room.rentalType = rentalType;
+  room.title = title;
+  room.country = country;
+  room.location = location;
+  room.isAcceptPet = isAcceptPet;
+  room.limitPeople = limitPeople;
+  room.price = price;
+  room.pattern = pattern;
+  room.averageRating = averageRating;
+  room.evaluationStandards = evaluationStandards;
+  room.allMessages = allMessages;
+  room.img = img;
+  room.alleqptAndServices = alleqptAndServices;
+
+  const updateRoom = await room.save();
+
+  res.json({ message: `${updateRoom.id} updated` });
+});
 
 const deleteRoom = asyncHandler(async (req, res) => {});
 

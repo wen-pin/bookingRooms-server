@@ -69,22 +69,18 @@ const roomSchema = new mongoose.Schema({
   // 房東姓名
   landlord: {
     type: String,
-    required: true,
   },
   // 房間類型
   rentalType: {
     type: String,
-    required: true,
   },
   // 房間標題
   title: {
     type: String,
-    required: true,
   },
   // 國家
   country: {
     type: String,
-    required: true,
   },
   location: locationSchema,
   // 是否接受寵物入住
