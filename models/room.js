@@ -7,6 +7,10 @@ const locationSchema = new mongoose.Schema({
   lat: Number,
   // 經度
   lng: Number,
+  // 標題
+  title: String,
+  // 內容
+  content: String,
 });
 
 const priceSchema = new mongoose.Schema({
