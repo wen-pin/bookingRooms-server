@@ -4,7 +4,7 @@ const bookingRoomsController = require("../controllers/bookingRoomsController");
 const verifyJWT = require("../middleware/verifyJWT");
 
 router.get("/", bookingRoomsController.getAllbookingRooms);
-router.get("/:id", bookingRoomsController.getbookingRoom);
+router.get("/v1", bookingRoomsController.getbookingRoom);
 router.post("/", bookingRoomsController.createNewBookingRoom);
 // router.patch("/:id", bookingRoomsController.updateRoom);
 // router.delete("/:id", bookingRoomsController.deleteRoom);
