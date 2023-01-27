@@ -14,6 +14,16 @@ const bookingRoomSchema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: "room",
   },
+  createdAt: {
+    type: Date,
+    // 不可變標誌
+    immutable: true,
+    default: () => Date.now(),
+  },
+  updatedAt: {
+    type: Date,
+    default: () => Date.now(),
+  },
 });
 
 module.exports = mongoose.model("bookingRoom", bookingRoomSchema);

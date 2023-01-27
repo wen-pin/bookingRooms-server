@@ -12,6 +12,24 @@ const getAllbookingRooms = asyncHandler(async (req, res) => {
   res.json(bookingRooms);
 });
 
+const getbookingRoom = asyncHandler(async (req, res) => {
+  const { username } = req.body;
+
+  if (!username) {
+    return res.status(400).json({ message: "This field is required" });
+  }
+
+  const bookingRoom = await BookingRoom.find({ bookerName: username })
+    .populate("room")
+    .exec();
+
+  if (!bookingRoom) {
+    return res.status(400).json({ message: "bookingRoom is not found" });
+  }
+
+  res.json(bookingRoom);
+});
+
 const createNewBookingRoom = asyncHandler(async (req, res) => {
   const { bookerName, bookingDate, roomId } = req.body;
   if (!bookerName || !bookingDate || !roomId) {
@@ -40,5 +58,6 @@ const createNewBookingRoom = asyncHandler(async (req, res) => {
 
 module.exports = {
   getAllbookingRooms,
+  getbookingRoom,
   createNewBookingRoom,
 };
