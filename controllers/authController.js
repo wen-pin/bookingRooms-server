@@ -33,7 +33,7 @@ const login = asyncHandler(async (req, res) => {
       },
     },
     process.env.ACCESS_TOKEN_SECRET,
-    { expiresIn: "30s" }
+    { expiresIn: "15m" }
   );
 
   const refreshToken = jwt.sign(
@@ -102,8 +102,11 @@ const logout = (req, res) => {
 };
 
 const user = asyncHandler(async (req, res) => {
-  username = req.user;
-  res.json({ username });
+  const user = await User.findOne({ username: req.user })
+    .select("-password")
+    .lean()
+    .exec();
+  res.json({ user });
 });
 
 module.exports = {
