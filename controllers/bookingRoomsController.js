@@ -31,12 +31,12 @@ const getbookingRoom = asyncHandler(async (req, res) => {
 });
 
 const createNewBookingRoom = asyncHandler(async (req, res) => {
-  const { bookerName, bookingDate, roomId } = req.body;
-  if (!bookerName || !bookingDate || !roomId) {
+  const { bookerName, bookingDate, payment, roomId } = req.body;
+  if (!bookerName || !bookingDate || !roomId || !payment) {
     return res.status(400).json({ message: "All fields are required" });
   }
 
-  const bookingRoomObject = { bookerName, bookingDate };
+  const bookingRoomObject = { bookerName, bookingDate, payment };
 
   const bookingRoom = await BookingRoom.create(bookingRoomObject);
 

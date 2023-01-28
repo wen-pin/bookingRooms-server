@@ -10,6 +10,10 @@ const bookingRoomSchema = new mongoose.Schema({
   bookingDate: {
     type: String,
   },
+  // 支付方式
+  payment: {
+    type: String,
+  },
   room: {
     type: Schema.Types.ObjectId,
     ref: "room",
