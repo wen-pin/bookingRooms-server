@@ -1,9 +1,10 @@
 const Room = require("../models/room");
 const Counter = require("../models/counter");
+const LandlordInfo = require("../models/landlordInfo");
 const asyncHandler = require("express-async-handler");
 
 const getAllRooms = asyncHandler(async (req, res) => {
-  const rooms = await Room.find().lean();
+  const rooms = await Room.find().populate("landlordInfo").exec();
 
   if (!rooms?.length) {
     return res.status(400).json({ message: "No rooms found" });
@@ -19,7 +20,7 @@ const getRoom = asyncHandler(async (req, res) => {
     return res.status(400).json({ message: "This field is required" });
   }
 
-  const room = await Room.findOne({ id: id });
+  const room = await Room.findOne({ id: id }).populate("landlordInfo").exec();
 
   if (!room) {
     return res.status(400).json({ message: "Room is not found" });
@@ -86,6 +87,12 @@ const createNewRoom = asyncHandler(async (req, res) => {
 
       const room = await Room.create(roomObject);
 
+      const { _id } = await LandlordInfo.findOne({ name: landlord });
+
+      room.landlordInfo = _id;
+
+      await room.save();
+
       if (room) {
         //created
         res.status(201).json({ message: `New room ${title} created` });
@@ -99,7 +106,7 @@ const createNewRoom = asyncHandler(async (req, res) => {
 const updateRoom = asyncHandler(async (req, res) => {
   const {
     id,
-    landlord,
+    landlordInfo,
     rentalType,
     title,
     country,
@@ -121,7 +128,7 @@ const updateRoom = asyncHandler(async (req, res) => {
   }
 
   room.id = id;
-  room.landlord = landlord;
+  room.landlordInfo = landlordInfo;
   room.rentalType = rentalType;
   room.title = title;
   room.country = country;

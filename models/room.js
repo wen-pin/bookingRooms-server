@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { Schema } = mongoose;
 
 const locationSchema = new mongoose.Schema({
   // 地址
@@ -73,6 +74,11 @@ const roomSchema = new mongoose.Schema({
   // 房東姓名
   landlord: {
     type: String,
+  },
+  // 房東詳細資訊
+  landlordInfo: {
+    type: Schema.Types.ObjectId,
+    ref: "landlordInfo",
   },
   // 房間類型
   rentalType: {
