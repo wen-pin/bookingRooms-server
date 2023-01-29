@@ -65,6 +65,7 @@ const createNewRoom = asyncHandler(async (req, res) => {
         allMessages,
         img,
         alleqptAndServices,
+        notes,
       } = req.body;
 
       const roomObject = {
@@ -83,6 +84,7 @@ const createNewRoom = asyncHandler(async (req, res) => {
         allMessages,
         img,
         alleqptAndServices,
+        notes,
       };
 
       const room = await Room.create(roomObject);
@@ -120,6 +122,7 @@ const updateRoom = asyncHandler(async (req, res) => {
     allMessages,
     img,
     alleqptAndServices,
+    notes,
   } = req.body;
 
   const room = await Room.findOne({ id: id });
@@ -142,6 +145,7 @@ const updateRoom = asyncHandler(async (req, res) => {
   room.allMessages = allMessages;
   room.img = img;
   room.alleqptAndServices = alleqptAndServices;
+  room.notes = notes;
 
   const updateRoom = await room.save();
 

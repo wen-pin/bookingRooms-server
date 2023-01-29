@@ -68,6 +68,27 @@ const alleqptAndServicesSchema = new mongoose.Schema({
   eqptAndServices: [eqptAndServiceSchema],
 });
 
+const notesSchema = new mongoose.Schema({
+  // 入住時間
+  checkIn: {
+    type: String,
+  },
+  // 退房時間
+  checkOut: {
+    type: String,
+  },
+  // 其他規則
+  other: {
+    type: String,
+  },
+  // 安全與房源資訊
+  safeInfo: [alleqptAndServicesSchema],
+  // 退訂資訊
+  unsubscribeInfo: {
+    type: String,
+  },
+});
+
 // unique表示唯一的，表示數據裡面的值不能重複
 const roomSchema = new mongoose.Schema({
   id: Number,
@@ -92,6 +113,7 @@ const roomSchema = new mongoose.Schema({
   country: {
     type: String,
   },
+  // 位址資訊
   location: locationSchema,
   // 是否接受寵物入住
   isAcceptPet: Boolean,
@@ -109,7 +131,10 @@ const roomSchema = new mongoose.Schema({
   img: {
     roomQuality: Number,
   },
+  // 有提供的設備與服務
   alleqptAndServices: [alleqptAndServicesSchema],
+  // 所有注意事項
+  notes: notesSchema,
 });
 
 module.exports = mongoose.model("room", roomSchema);
