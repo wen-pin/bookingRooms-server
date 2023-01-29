@@ -23,6 +23,10 @@ const landlordInfoSchema = new mongoose.Schema({
   isNice: {
     type: Boolean,
   },
+  // 回覆率
+  responseRate: {
+    type: String,
+  },
   // 回覆時間
   responseTime: {
     type: String,

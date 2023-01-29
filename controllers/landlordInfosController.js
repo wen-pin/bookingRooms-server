@@ -14,10 +14,17 @@ const getAllLandlordInfos = asyncHandler(async (req, res) => {
 const getLandlordInfo = asyncHandler(async (req, res) => {});
 
 const createNewLandlordInfo = asyncHandler(async (req, res) => {
-  const { name, isAuth, isNice, responseTime, selfIntroduction, language } =
-    req.body;
+  const {
+    name,
+    isAuth,
+    isNice,
+    responseRate,
+    responseTime,
+    selfIntroduction,
+    language,
+  } = req.body;
 
-  if (!name || !responseTime || !selfIntroduction) {
+  if (!name || !responseRate || !responseTime || !selfIntroduction) {
     return res.status(400).json({ message: "All fields are required" });
   }
 
@@ -25,6 +32,7 @@ const createNewLandlordInfo = asyncHandler(async (req, res) => {
     name,
     isAuth,
     isNice,
+    responseRate,
     responseTime,
     selfIntroduction,
     language,
@@ -40,7 +48,35 @@ const createNewLandlordInfo = asyncHandler(async (req, res) => {
   }
 });
 
-const updateLandlordInfo = asyncHandler(async (req, res) => {});
+const updateLandlordInfo = asyncHandler(async (req, res) => {
+  const {
+    name,
+    isAuth,
+    isNice,
+    responseRate,
+    responseTime,
+    selfIntroduction,
+    language,
+  } = req.body;
+
+  const landlordInfo = await LandlordInfo.findOne({ name: name });
+
+  if (!landlordInfo) {
+    return res.status(400).json({ message: "LandlordInfo is not found" });
+  }
+
+  landlordInfo.name = name;
+  landlordInfo.isAuth = isAuth;
+  landlordInfo.isNice = isNice;
+  landlordInfo.responseRate = responseRate;
+  landlordInfo.responseTime = responseTime;
+  landlordInfo.selfIntroduction = selfIntroduction;
+  landlordInfo.language = language;
+
+  const updateRoom = await landlordInfo.save();
+
+  res.json(updateRoom);
+});
 
 const deleteLandlordInfo = asyncHandler(async (req, res) => {});
 
