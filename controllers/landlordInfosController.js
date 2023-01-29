@@ -11,7 +11,15 @@ const getAllLandlordInfos = asyncHandler(async (req, res) => {
   res.json(landlordInfos);
 });
 
-const getLandlordInfo = asyncHandler(async (req, res) => {});
+const getLandlordInfo = asyncHandler(async (req, res) => {
+  const landlordInfo = await LandlordInfo.findById(req.params.id).exec();
+
+  if (!landlordInfo) {
+    return res.status(400).json({ message: "landlordInfo is not found" });
+  }
+
+  res.json(landlordInfo);
+});
 
 const createNewLandlordInfo = asyncHandler(async (req, res) => {
   const {
@@ -59,7 +67,7 @@ const updateLandlordInfo = asyncHandler(async (req, res) => {
     language,
   } = req.body;
 
-  const landlordInfo = await LandlordInfo.findOne({ name: name });
+  const landlordInfo = await LandlordInfo.findById(req.params.id).exec();
 
   if (!landlordInfo) {
     return res.status(400).json({ message: "LandlordInfo is not found" });
