@@ -2,7 +2,7 @@ const BookingRoom = require("../models/bookingRoom");
 const Room = require("../models/room");
 const asyncHandler = require("express-async-handler");
 
-const getAllbookingRooms = asyncHandler(async (req, res) => {
+const getAllBookingRooms = asyncHandler(async (req, res) => {
   const bookingRooms = await BookingRoom.find().populate("room").exec();
 
   if (!bookingRooms?.length) {
@@ -12,7 +12,7 @@ const getAllbookingRooms = asyncHandler(async (req, res) => {
   res.json(bookingRooms);
 });
 
-const getbookingRoom = asyncHandler(async (req, res) => {
+const getBookingRoom = asyncHandler(async (req, res) => {
   const { username } = req.body;
 
   if (!username) {
@@ -32,6 +32,7 @@ const getbookingRoom = asyncHandler(async (req, res) => {
 
 const createNewBookingRoom = asyncHandler(async (req, res) => {
   const { bookerName, bookingDate, payment, roomId } = req.body;
+
   if (!bookerName || !bookingDate || !roomId || !payment) {
     return res.status(400).json({ message: "All fields are required" });
   }
@@ -57,7 +58,7 @@ const createNewBookingRoom = asyncHandler(async (req, res) => {
 });
 
 module.exports = {
-  getAllbookingRooms,
-  getbookingRoom,
+  getAllBookingRooms,
+  getBookingRoom,
   createNewBookingRoom,
 };
