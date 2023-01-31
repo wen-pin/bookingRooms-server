@@ -14,13 +14,8 @@ $ npm install
 ## API
 
 ### Auth
-| Method          | Path               | Parameter                   | Description                 |
-| --------------- | ------------------ | --------------------------- | --------------------------- |
-| POST            | /api/auth/login    | 
-`
-{ 
-  username: String
-  password: String 
-}`         | 123                         |
-| POST            | /api/auth/logout    |           | 123                         |
-| GET            | /api/auth/user    | username password           | 123                         |
+| Method          | Path               | Parameter                               | token                 | Description                     |
+| --------------- | ------------------ | --------------------------------------- | ---------------------- | ------------------------------ |
+| POST            | /api/auth/login    | username: String <br> password: String  |                       | login account                   |
+| POST            | /api/auth/logout   |                                         |                       | log out                         |
+| GET             | /api/auth/user     |                                         | Required              | get a member                    |
