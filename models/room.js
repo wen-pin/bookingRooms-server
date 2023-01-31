@@ -77,6 +77,10 @@ const notesSchema = new mongoose.Schema({
   checkOut: {
     type: String,
   },
+  // 是否允許抽菸
+  isSmoking: {
+    type: Boolean,
+  },
   // 其他規則
   other: {
     type: String,
