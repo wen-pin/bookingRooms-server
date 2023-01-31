@@ -19,3 +19,7 @@ $ npm install
 | POST            | /api/auth/login    | username: String <br> password: String  |                       | login account                   |
 | POST            | /api/auth/logout   |                                         |                       | log out                         |
 | GET             | /api/auth/user     |                                         | Required              | get a member                    |
+
+### Rooms
+
+
