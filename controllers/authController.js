@@ -102,7 +102,7 @@ const logout = (req, res) => {
 };
 
 const user = asyncHandler(async (req, res) => {
-  const user = await User.findOne({ username: req.user })
+  const user = await User.findOne({ username: req.username })
     .select("-password")
     .lean()
     .exec();
