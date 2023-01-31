@@ -7,6 +7,10 @@
 
 ## Installation
 
+```
+$ npm install
+```
+
 ## API
 
 | Syntax      | Description | Description |
