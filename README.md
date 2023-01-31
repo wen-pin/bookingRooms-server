@@ -13,7 +13,10 @@ $ npm install
 
 ## API
 
-| Syntax      | Description | Description |
-| ----------- | ----------- | ----------- |
-| Header      | Title       | Title       |
-| Paragraph   | Text        | Text        |
+##### Auth
+
+| Method      | Path        | Parameter   | Description |
+| ----------- | ----------- | ----------- | ----------- |
+| POST        | /api/auth/login  | username password | 123         |
+| POST        | /api/auth/logout | cookies           | 123         |
+| GET         | /api/auth/user   | user              | 123         |
