@@ -105,6 +105,10 @@ const roomSchema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: "landlordInfo",
   },
+  // 空間介紹
+  spaceInfo: {
+    type: String,
+  },
   // 房間類型
   rentalType: {
     type: String,
