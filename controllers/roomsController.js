@@ -110,6 +110,7 @@ const createNewRoom = asyncHandler(async (req, res) => {
 const updateRoom = asyncHandler(async (req, res) => {
   const {
     id,
+    landlord,
     landlordInfo,
     spaceInfo,
     rentalType,
@@ -134,6 +135,7 @@ const updateRoom = asyncHandler(async (req, res) => {
   }
 
   room.id = id;
+  room.landlord = landlord;
   room.landlordInfo = landlordInfo;
   room.spaceInfo = spaceInfo;
   room.rentalType = rentalType;
