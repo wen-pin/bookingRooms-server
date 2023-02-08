@@ -14,11 +14,11 @@ $ npm install
 ## API
 
 ### Auth
-| Method          | Path               | Body                                    | token                  | Description                     |
-| --------------- | ------------------ | --------------------------------------- | ---------------------- | ------------------------------- |
-| GET             | /api/auth/user     |                                         | Required               | get a member                    |
-| POST            | /api/auth/login    | username: String <br> password: String  |                        | login account                   |
-| POST            | /api/auth/logout   |                                         |                        | logout                          |
+| Method          | Path               | Body                                    | token                  | Description                                 |
+| --------------- | ------------------ | --------------------------------------- | ---------------------- | ------------------------------------------- |
+| GET             | /api/auth/user     |                                         | Required               | get a member                                |
+| POST            | /api/auth/login    | username: String <br> password: String  |                        | login account                               |
+| POST            | /api/auth/logout   |                                         |                        | logout                                      |
 
 ### Rooms
 | Method          | Path               | Body                                    | Params                  | Description                     |
