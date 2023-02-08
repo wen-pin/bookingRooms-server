@@ -41,4 +41,4 @@ $ npm install
 | --------------- | ----------------------- | --------------------------------------- | ----------------------- | ------------------------------- |
 | GET             | /api/bookingRooms       |                                         |                         | get all bookingRooms            |
 | POST            | /api/bookingRooms/v1    | username: String                        |                         | get ${username} bookingRooms    |
-| GET             | /api/bookingRooms      | bookerName: String <br> bookingDate: String <br> payment: String <br> roomId: Number                                                                                                                               |         | create a bookingRoom            |
+| POST            | /api/bookingRooms      | bookerName: String <br> bookingDate: String <br> payment: String <br> roomId: Number                                                                                                                               |         | create a bookingRoom            |
