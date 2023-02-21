@@ -14,6 +14,9 @@ const bookingRoomSchema = new mongoose.Schema({
   payment: {
     type: String,
   },
+  roomId: {
+    type: Number,
+  },
   room: {
     type: Schema.Types.ObjectId,
     ref: "room",
